@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driftwood Coffee Co — Small-batch coastal coffee</title>
+<meta name="description" content="Driftwood Coffee Co is a small-batch coastal roaster and cafe. Slow-poured, salt-air coffee and a shop built from salvaged wood.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EDE6D6;
+    --foam:#FAF8F3;
+    --wood:#8C8577;
+    --wood-dark:#5F5A4F;
+    --navy:#26343C;
+    --ink:#20302f;
+    --seaglass:#6E9686;
+    --seaglass-dark:#557b6d;
+    --rope:#C9A876;
+    --line: rgba(32,48,47,0.14);
+    --maxw: 1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Public Sans', system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0 0 0.4em;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--seaglass-dark);
+    display:inline-flex;
+    align-items:center;
+    gap:0.5em;
+    margin-bottom:0.9em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:1.4em;
+    height:1px;
+    background:var(--seaglass-dark);
+    display:inline-block;
+  }
+
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  section{position:relative;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- focus & motion ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--seaglass-dark);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible{opacity:1; transform:none;}
+
+  /* ---------- nav ---------- */
+  header.site-nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    padding:18px 0;
+    transition:background 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease;
+  }
+  header.site-nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  header.site-nav.scrolled{
+    background:rgba(250,248,243,0.92);
+    backdrop-filter:blur(6px);
+    padding:12px 0;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    letter-spacing:-0.01em;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand-mark{
+    width:26px;height:26px;flex:none;
+  }
+  nav.links{
+    display:flex;
+    gap:28px;
+    font-size:0.92rem;
+  }
+  nav.links a{
+    text-decoration:none;
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav.links a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0;
+    height:1px; background:var(--ink);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.25s ease;
+  }
+  nav.links a:hover::after{transform:scaleX(1);}
+  @media (max-width:680px){
+    nav.links{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-top:120px;
+    padding-bottom:90px;
+    background:
+      repeating-linear-gradient(100deg, rgba(140,133,119,0.05) 0px, rgba(140,133,119,0.05) 2px, transparent 2px, transparent 34px),
+      repeating-linear-gradient(100deg, rgba(140,133,119,0.035) 0px, rgba(140,133,119,0.035) 1px, transparent 1px, transparent 11px),
+      var(--sand);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    gap:48px;
+    align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem, 6.2vw, 5.1rem);
+    line-height:0.98;
+    max-width:11ch;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--seaglass-dark);
+  }
+  .hero-sub{
+    font-size:1.08rem;
+    max-width:42ch;
+    color:var(--wood-dark);
+    margin-bottom:1.7em;
+  }
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 22px;
+    border-radius:2px;
+    border:1px solid var(--ink);
+    transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+  .btn-solid{background:var(--ink); color:var(--foam);}
+  .btn-solid:hover{background:var(--seaglass-dark); border-color:var(--seaglass-dark); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--foam); transform:translateY(-1px);}
+
+  .hero-tags{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--wood-dark);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    border-left:1px solid var(--line);
+    padding-left:20px;
+  }
+  .hero-tags span{display:block;}
+  .hero-tags strong{color:var(--ink); font-weight:500;}
+
+  /* ---------- tide divider ---------- */
+  .tide{
+    display:block;
+    width:100%;
+    height:56px;
+    margin-bottom:-1px;
+  }
+
+  /* ---------- about ---------- */
+  .about{
+    background:var(--foam);
+    padding:110px 0 100px;
+  }
+  .about .wrap{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about h2{
+    font-size:clamp(1.9rem, 3.4vw, 2.6rem);
+    max-width:9ch;
+  }
+  .about p{
+    color:var(--wood-dark);
+    max-width:56ch;
+    margin:0 0 1.1em;
+  }
+  .about-figure{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:3px;
+    overflow:hidden;
+    background:
+      linear-gradient(155deg, #B8C9BE 0%, #9FB6A9 38%, #6E9686 100%);
+  }
+  .about-figure svg{position:absolute; inset:0; width:100%; height:100%;}
+
+  .stat-row{
+    display:flex;
+    gap:36px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .stat{font-family:'IBM Plex Mono', monospace;}
+  .stat b{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:1.9rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .stat span{font-size:0.74rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--wood-dark);}
+
+  /* ---------- menu ---------- */
+  .menu{
+    background:var(--sand);
+    padding:100px 0 110px;
+  }
+  .menu-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:52px;
+    flex-wrap:wrap;
+  }
+  .menu-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem); margin:0; max-width:11ch;}
+  .menu-note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--wood-dark);
+    max-width:32ch;
+  }
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:720px){
+    .menu-grid{grid-template-columns:1fr;}
+    .about .wrap{grid-template-columns:1fr;}
+    .hero .wrap{grid-template-columns:1fr; gap:26px;}
+    .hero-tags{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:16px;}
+  }
+
+  .item{
+    background:var(--foam);
+    padding:34px 32px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    transition:background 0.25s ease;
+  }
+  .item:hover{background:#F1EEE4;}
+  .item-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+  }
+  .item h3{font-size:1.28rem; margin:0;}
+  .price{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.92rem;
+    color:var(--seaglass-dark);
+    white-space:nowrap;
+  }
+  .item p{margin:0; color:var(--wood-dark); font-size:0.94rem; max-width:38ch;}
+  .tag-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--wood-dark);
+  }
+
+  /* ---------- reserve ---------- */
+  .reserve{
+    background:var(--foam);
+    padding:100px 0 100px;
+  }
+  .reserve-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem); max-width:10ch;}
+  .reserve-panel{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:800px){
+    .reserve-panel{grid-template-columns:1fr;}
+  }
+  .reserve-col{background:var(--foam); padding:34px 32px;}
+
+  .field-label{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--wood-dark);
+    margin-bottom:10px;
+  }
+  input[type="date"], input[type="text"], input[type="email"], input[type="number"]{
+    width:100%;
+    font-family:'Public Sans', sans-serif;
+    font-size:0.96rem;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    background:var(--sand);
+    color:var(--ink);
+  }
+  input:focus-visible{outline:2px solid var(--seaglass-dark); outline-offset:1px;}
+
+  .slot-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(84px, 1fr));
+    gap:8px;
+    margin-top:6px;
+  }
+  .slot-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    padding:10px 6px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    background:var(--sand);
+    color:var(--ink);
+    cursor:pointer;
+    text-align:center;
+    transition:background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .slot-btn:hover:not(:disabled){border-color:var(--seaglass-dark);}
+  .slot-btn.selected{background:var(--seaglass-dark); border-color:var(--seaglass-dark); color:var(--foam);}
+  .slot-btn.low{color:var(--rope);}
+  .slot-btn:disabled{
+    opacity:0.4;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .slot-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--wood-dark);
+    margin-top:16px;
+    min-height:1.2em;
+  }
+
+  .form-grid{display:grid; gap:16px;}
+  .form-row-2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:480px){.form-row-2{grid-template-columns:1fr;}}
+
+  .reserve-submit{
+    margin-top:6px;
+    width:100%;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .reserve-submit:disabled{opacity:0.5; cursor:not-allowed;}
+
+  .reserve-msg{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    margin-top:16px;
+    padding:12px 14px;
+    border-radius:2px;
+    display:none;
+  }
+  .reserve-msg.show{display:block;}
+  .reserve-msg.ok{background:rgba(110,150,134,0.15); color:var(--seaglass-dark); border:1px solid var(--seaglass-dark);}
+  .reserve-msg.err{background:rgba(196,90,60,0.1); color:#a4472c; border:1px solid #a4472c;}
+
+  /* ---------- visit ---------- */
+  .visit{
+    background:var(--navy);
+    color:var(--sand);
+    padding:110px 0 100px;
+  }
+  .visit .eyebrow{color:#9FC2AF;}
+  .visit .eyebrow::before{background:#9FC2AF;}
+  .visit h2{color:var(--foam); max-width:10ch;}
+  .visit .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  @media (max-width:720px){
+    .visit .wrap{grid-template-columns:1fr;}
+  }
+  .visit-block{border-top:1px solid rgba(237,230,214,0.18); padding-top:22px; margin-top:22px;}
+  .visit-block:first-child{margin-top:0;}
+  .visit-block h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#9FC2AF;
+    margin:0 0 10px;
+    font-weight:500;
+  }
+  .hours-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:0.94rem;
+    padding:6px 0;
+    color:#DCD6C6;
+    max-width:320px;
+  }
+  .hours-row b{color:var(--foam); font-weight:500;}
+
+  .visit address{font-style:normal; font-size:1.05rem; color:var(--foam); line-height:1.6;}
+  .visit .btn-solid{background:var(--seaglass); border-color:var(--seaglass); color:var(--navy); margin-top:22px;}
+  .visit .btn-solid:hover{background:var(--foam); border-color:var(--foam);}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--navy);
+    color:#9AA6A2;
+    padding:26px 0 34px;
+    border-top:1px solid rgba(237,230,214,0.12);
+    font-size:0.8rem;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 15c3-4 6 4 9 0s6-4 9 0" stroke="#26343C" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M4 20c3-4 6 4 9 0s6-4 9 0" stroke="#6E9686" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M9 4l1.5 6L7 12l4 1-1 6" stroke="#8C8577" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Driftwood Coffee Co
+    </a>
+    <nav class="links">
+      <a href="#about">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#reserve">Reserve</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a href="#reserve" class="btn btn-ghost" style="padding:9px 16px;">Book a table</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Small-batch · roasted on the harbor</p>
+        <h1>Coffee, <em>weathered</em> and slow-poured.</h1>
+        <p class="hero-sub">Driftwood Coffee Co roasts in small batches a block from the water, in a shop built from salvaged timber. No rush, no syrup pumps — just good beans and time.</p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn btn-solid">See the menu</a>
+          <a href="#visit" class="btn btn-ghost">Get directions</a>
+        </div>
+      </div>
+      <div class="hero-tags">
+        <span><strong>Origin</strong> — Chiapas &amp; Yirgacheffe lots</span>
+        <span><strong>Roast</strong> — light to medium, weekly</span>
+        <span><strong>Open</strong> — daily from 6:30am</span>
+      </div>
+    </div>
+  </section>
+
+  <svg class="tide" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,30 C150,58 350,2 600,28 C850,54 1050,4 1200,26 L1200,60 L0,60 Z" fill="var(--foam)"/>
+  </svg>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Our story</p>
+        <h2>Built from what the tide brought in.</h2>
+        <p>Driftwood Coffee Co started with a single roaster in a garage and a habit of pulling usable timber off the beach after storms. That wood became our counters and shelves — every board a different grain, nothing matching on purpose.</p>
+        <p>We treat the coffee the same way: sourced from a handful of farms we've visited ourselves, roasted in batches small enough to taste the difference week to week, and served without pretense.</p>
+        <div class="stat-row">
+          <div class="stat"><b>12</b><span>years roasting</span></div>
+          <div class="stat"><b>6</b><span>farms we buy direct from</span></div>
+          <div class="stat"><b>1</b><span>block from the harbor</span></div>
+        </div>
+      </div>
+      <div class="about-figure reveal">
+        <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M0 340 Q60 300 130 335 T260 330 T400 345 V500 H0 Z" fill="#5F5A4F" opacity="0.35"/>
+          <path d="M0 380 Q80 350 160 378 T320 372 T400 390 V500 H0 Z" fill="#26343C" opacity="0.5"/>
+          <g stroke="#FAF8F3" stroke-width="1" opacity="0.4">
+            <path d="M40 60 q30 30 0 70 q-30 30 0 60"/>
+            <path d="M90 50 q30 40 0 80 q-30 40 0 70"/>
+            <path d="M140 65 q30 30 0 65 q-30 35 0 60"/>
+          </g>
+          <circle cx="330" cy="90" r="34" fill="#EDE6D6" opacity="0.55"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <div class="menu-head reveal">
+        <h2>What's brewing</h2>
+        <p class="menu-note">A short list, changed with the seasons. Ask what's on pour-over today.</p>
+      </div>
+      <div class="menu-grid reveal">
+        <div class="item">
+          <div class="item-top"><h3>Low Tide Latte</h3><span class="price">$5.25</span></div>
+          <p>Double espresso, steamed milk, a thin pour of brown-butter syrup we make in-house.</p>
+          <div class="tag-row"><span class="tag">Espresso</span><span class="tag">Hot or iced</span></div>
+        </div>
+        <div class="item">
+          <div class="item-top"><h3>Salt Air Cold Brew</h3><span class="price">$4.75</span></div>
+          <p>Steeped eighteen hours, cut with soda water and a pinch of sea salt.</p>
+          <div class="tag-row"><span class="tag">Cold brew</span><span class="tag">Lightly fizzed</span></div>
+        </div>
+        <div class="item">
+          <div class="item-top"><h3>High Tide Mocha</h3><span class="price">$5.75</span></div>
+          <p>Dark chocolate, double espresso, whole milk. Not too sweet — we mean it.</p>
+          <div class="tag-row"><span class="tag">Espresso</span><span class="tag">Hot or iced</span></div>
+        </div>
+        <div class="item">
+          <div class="item-top"><h3>Sea Glass Matcha</h3><span class="price">$5.50</span></div>
+          <p>Ceremonial-grade matcha, whisked to order, oat milk by default.</p>
+          <div class="tag-row"><span class="tag">Caffeine: moderate</span><span class="tag">Vegan</span></div>
+        </div>
+        <div class="item">
+          <div class="item-top"><h3>Harbor Pour-Over</h3><span class="price">$4.50</span></div>
+          <p>Single origin, rotating weekly. Brewed to order, takes about four minutes.</p>
+          <div class="tag-row"><span class="tag">Single origin</span><span class="tag">Filter</span></div>
+        </div>
+        <div class="item">
+          <div class="item-top"><h3>Driftwood Drip</h3><span class="price">$3.25</span></div>
+          <p>Our house blend, brewed by the pot all day. Ask what today's blend is.</p>
+          <div class="tag-row"><span class="tag">House blend</span><span class="tag">Refills $1</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reserve" id="reserve">
+    <div class="wrap">
+      <div class="reserve-head reveal">
+        <p class="eyebrow">Reservations</p>
+        <h2>Book a table.</h2>
+        <p class="menu-note" style="max-width:44ch;">Pick a date, then a time — availability updates live. Walk-ins are always welcome too.</p>
+      </div>
+
+      <form class="reserve-panel reveal" id="reserveForm" novalidate>
+        <div class="reserve-col">
+          <label class="field-label" for="resDate">Date</label>
+          <input type="date" id="resDate" name="date" required>
+
+          <div style="margin-top:22px;">
+            <span class="field-label">Time</span>
+            <div class="slot-grid" id="slotGrid" aria-live="polite">
+              <span class="slot-status">Loading availability…</span>
+            </div>
+            <div class="slot-status" id="slotStatus"></div>
+          </div>
+        </div>
+
+        <div class="reserve-col">
+          <div class="form-grid">
+            <div class="form-row-2">
+              <div>
+                <label class="field-label" for="resName">Name</label>
+                <input type="text" id="resName" name="name" required autocomplete="name">
+              </div>
+              <div>
+                <label class="field-label" for="resParty">Party size</label>
+                <input type="number" id="resParty" name="partySize" min="1" max="6" value="2" required>
+              </div>
+            </div>
+            <div>
+              <label class="field-label" for="resEmail">Email</label>
+              <input type="email" id="resEmail" name="email" required autocomplete="email">
+            </div>
+            <button type="submit" class="btn btn-solid reserve-submit" id="resSubmit">Confirm reservation</button>
+            <div class="reserve-msg" id="resMsg" role="status"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Come by</p>
+        <h2>Find the shop.</h2>
+        <div class="visit-block">
+          <h4>Address</h4>
+          <address>214 Harbor Row<br>Port Calder, ME 04101</address>
+          <a href="#" class="btn btn-solid">Get directions</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="visit-block" style="margin-top:0;">
+          <h4>Hours</h4>
+          <div class="hours-row"><span>Mon – Fri</span><b>6:30am – 4:00pm</b></div>
+          <div class="hours-row"><span>Saturday</span><b>7:00am – 4:00pm</b></div>
+          <div class="hours-row"><span>Sunday</span><b>7:30am – 2:00pm</b></div>
+        </div>
+        <div class="visit-block">
+          <h4>Reach us</h4>
+          <div class="hours-row"><span>Phone</span><b>(207) 555-0148</b></div>
+          <div class="hours-row"><span>Email</span><b>hello@driftwoodcoffee.co</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Driftwood Coffee Co, Port Calder, ME</span>
+    <span>Roasted a block from the water.</span>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // reservations calendar
+  (function () {
+    const dateInput = document.getElementById('resDate');
+    const slotGrid = document.getElementById('slotGrid');
+    const slotStatus = document.getElementById('slotStatus');
+    const form = document.getElementById('reserveForm');
+    const submitBtn = document.getElementById('resSubmit');
+    const msg = document.getElementById('resMsg');
+
+    let selectedTime = null;
+
+    const todayStr = new Date().toISOString().slice(0, 10);
+    dateInput.min = todayStr;
+    dateInput.value = todayStr;
+
+    function showMsg(text, kind) {
+      msg.textContent = text;
+      msg.className = 'reserve-msg show ' + kind;
+    }
+    function clearMsg() {
+      msg.className = 'reserve-msg';
+      msg.textContent = '';
+    }
+
+    function formatTime12(t) {
+      const [h, m] = t.split(':').map(Number);
+      const period = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 === 0 ? 12 : h % 12;
+      return `${h12}:${m.toString().padStart(2, '0')} ${period}`;
+    }
+
+    async function loadAvailability() {
+      selectedTime = null;
+      clearMsg();
+      slotGrid.innerHTML = '<span class="slot-status">Loading availability…</span>';
+      slotStatus.textContent = '';
+
+      try {
+        const res = await fetch(`/api/reservations?date=${dateInput.value}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          slotGrid.innerHTML = '';
+          slotStatus.textContent = data.error || 'Could not load availability.';
+          return;
+        }
+
+        if (!data.open || data.slots.length === 0) {
+          slotGrid.innerHTML = '';
+          slotStatus.textContent = "We're closed that day — pick another date.";
+          return;
+        }
+
+        slotGrid.innerHTML = '';
+        data.slots.forEach(slot => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'slot-btn';
+          btn.textContent = formatTime12(slot.time);
+          btn.dataset.time = slot.time;
+
+          if (slot.tablesRemaining <= 0) {
+            btn.disabled = true;
+          } else if (slot.tablesRemaining === 1) {
+            btn.classList.add('low');
+          }
+
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedTime = slot.time;
+            slotStatus.textContent = `Selected ${formatTime12(slot.time)}`;
+          });
+
+          slotGrid.appendChild(btn);
+        });
+      } catch (err) {
+        slotGrid.innerHTML = '';
+        slotStatus.textContent = 'Could not reach the booking system — try again shortly.';
+      }
+    }
+
+    dateInput.addEventListener('change', loadAvailability);
+    loadAvailability();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearMsg();
+
+      if (!selectedTime) {
+        showMsg('Pick a time slot first.', 'err');
+        return;
+      }
+
+      const name = document.getElementById('resName').value.trim();
+      const email = document.getElementById('resEmail').value.trim();
+      const partySize = Number(document.getElementById('resParty').value);
+
+      if (!name) { showMsg('Enter your name.', 'err'); return; }
+      if (!email) { showMsg('Enter your email.', 'err'); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Booking…';
+
+      try {
+        const res = await fetch('/api/reservations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ date: dateInput.value, time: selectedTime, name, email, partySize })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showMsg(data.error || 'Something went wrong — try another slot.', 'err');
+          if (res.status === 409) loadAvailability();
+        } else {
+          showMsg(`You're booked for ${formatTime12(selectedTime)} on ${dateInput.value}. A confirmation was sent to ${email}.`, 'ok');
+          form.reset();
+          dateInput.value = todayStr;
+          loadAvailability();
+        }
+      } catch (err) {
+        showMsg('Could not reach the booking system — try again shortly.', 'err');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirm reservation';
+      }
+    });
+  })();
+
+  // scroll reveal
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
